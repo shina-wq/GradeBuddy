@@ -153,7 +153,29 @@ def display_gpa_by_year_and_term():
     print(f"Overall GPA for the Program: {program_gpa:.2f}")
 
     connection.close()
+    
+# General delete function
+def delete_entity(entity_type, entity_id):
+    connection = sqlite3.connect("grade_tracker.db")
+    cursor = connection.cursor()
 
+    if entity_type == "grade":
+        cursor.execute("DELETE FROM grades WHERE grade_id = ?", (entity_id,))
+        print(f"Grade with ID {entity_id} deleted successfully.")
+    elif entity_type == "assignment":
+        cursor.execute("DELETE FROM assignments WHERE assignment_id = ?", (entity_id,))
+        print(f"Assignment with ID {entity_id} deleted successfully.")
+    elif entity_type == "class":
+        cursor.execute("DELETE FROM grades WHERE class_id = ?", (entity_id,))
+        cursor.execute("DELETE FROM assignments WHERE class_id = ?", (entity_id,))
+        cursor.execute("DELETE FROM classes WHERE class_id = ?", (entity_id,))
+        print(f"Class with ID {entity_id} and all associated grades and assignments deleted successfully.")
+    else:
+        print("Invalid entity type specified. Please choose 'grade', 'assignment', or 'class'.")
+
+    connection.commit()
+    connection.close()
+    
 # Main menu
 def main():
     initialize_database()
@@ -167,7 +189,8 @@ def main():
         print("4. Calculate class average")
         print("5. View upcoming assignments")
         print("6. View GPA by Year and Term")
-        print("7. Exit")
+        print("7. Delete a grade/assignment/class")
+        print("8. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -206,8 +229,14 @@ def main():
 
         elif choice == "6":
             display_gpa_by_year_and_term()
-
+            
         elif choice == "7":
+            entity_type = input("Enter entity to delete (grade, assignment, class): ").lower()
+            entity_id = int(input("Enter ID of the entity to delete: "))
+            delete_entity(entity_type, entity_id)
+            print("\nEntity deleted successfully.")
+
+        elif choice == "8":
             print("\nExiting the tracker. Goodbye!")
             break
 

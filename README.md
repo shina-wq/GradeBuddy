@@ -1,6 +1,6 @@
-# GradePal
+# GradeBuddy
 
-GradePal is a Python-based application designed to help students manage their grades, track assignments, and monitor progress towards achieving their academic goals. This project utilizes an SQLite database to store class information, grades, assignments, and more. It allows users to easily calculate weighted averages for each class and track upcoming assignments.
+GradeBuddy is a Python-based application designed to help students manage their grades, track assignments, and monitor progress towards achieving their academic goals. This project utilizes an SQLite database to store class information, grades, assignments, and more. It allows users to easily calculate weighted averages for each class and track upcoming assignments.
 
 ## Features
 
@@ -23,4 +23,4 @@ GradePal is a Python-based application designed to help students manage their gr
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/GradePal.git
+   git clone https://github.com/your-username/GradeBuddy.git

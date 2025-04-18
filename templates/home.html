@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GradeBuddy</title>
+    <link rel="stylesheet" href="../static/styles.css">
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to GradeBuddy!</h1>
+      <p>Your personal grade tracking assistant.</p>
+      <p><a href="{{ url_for('add_class') }}"> ➕Add a New Class</a></p>
+
+    </header>
+    <main>
+        <h2>Upcoming Assignments</h2>
+        <ul>
+          {% for title, due_date in assignments %}
+            <li><strong>{{ title }}</strong> - Due: {{ due_date }}</li>
+          {% else %}
+            <li>No Upcoming assignments this week.</li>
+          {% endfor %}
+        </ul>
+
+        <h2>Classes</h2>
+        <ul>
+          {% for class in classes %}
+            <li>
+              <strong>{{ class.class_name }}</strong> 
+              <a href="{{ url_for('add_grade', class_id=class.class_id) }}">Add Grade</a>
+            </li>
+          {% endfor %}
+        </ul>
+
+    </main>
+    <script src="../static/script.js"></script>
+  </body>
+</html>
